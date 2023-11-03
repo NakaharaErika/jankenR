@@ -1,0 +1,157 @@
+@charset "UTF-8";
+
+h1{
+	text-align: center;
+}
+/*スタートボタン*/
+.btn {
+display: inline-block;
+padding: 0.5em 2em;
+font-weight: bold;
+text-decoration: none !important;
+font-size: 20px;
+text-align:center;
+width:30%;
+}
+
+.btn-a02 {
+background-color: #d10022;
+border: 2px solid #d10022;
+color: #fff !important;
+margin: 0 0 10px 0;
+padding:5px 10px;
+box-shadow: 0 5px #8e0017;
+}
+.btn-a02:hover {
+border: 2px solid #d10022 !important;
+transform: translateY(5px) !important;
+-ms-transform: translateY(5px);
+-webkit-transform: translateY(5px);
+border-bottom: none;
+box-shadow: none;
+}
+
+.btn-a03 {
+background-color: rgb(101, 107, 191);
+border: 2px solid rgb(101, 107, 191);
+color: #fff !important;
+margin: 0 0 10px 0;
+padding:5px 10px;
+box-shadow: 0 5px rgb(52, 73, 129);
+}
+.btn-a03:hover {
+border: 2px solid gb(101, 107, 191) !important;
+transform: translateY(5px) !important;
+-ms-transform: translateY(5px);
+-webkit-transform: translateY(5px);
+border-bottom: none;
+box-shadow: none;
+}
+
+/*どれにするリスト*/
+.container {
+	max-width: 40vw;
+    margin: 2em auto;
+    background: #f1f1f1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.22);
+    text-align: center;
+}
+.container .box-title{
+    font-size: 1.2em;
+    background: #5fc2f5;
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+}
+.container .box-title-result{
+    font-size: 1.2em;
+    background: rgb(240, 82, 89);
+    padding: 4px;
+    text-align: center;
+    color: #FFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+    font-size: 40px;
+}
+
+/*２人？3人？*/
+.selectContainer{
+    margin:0.2rem;
+    padding: 1rem;
+    font-size: 40px;
+}
+
+
+/* ラジオボタンの○を消す */
+input[type="radio"] {
+    display: none;
+}
+/* 画像の周りに隙間をあける */
+label img {
+    margin: 3px;
+    padding: 5px;
+}
+/* 未選択の場合、色を薄くする */
+input[type="radio"] + label img {
+    opacity:0.2;
+  }
+/* 選択済みの場合、色を濃くする */
+input[type="radio"]:checked + label img {
+    opacity:1;
+}
+
+/* マウスホバーで未選択の場合、色をやや濃くする */
+input[type="radio"] + label img:hover {
+    opacity: 0.6;
+}
+
+/* マウスホバーで選択済みの場合、色をさらに濃く保つ */
+input[type="radio"]:checked + label img:hover {
+    opacity: 1;
+}
+
+/* ボタンのスタイリング */
+input[type="submit"] {
+    background: #5cb85c;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+	margin: 10px auto;
+	display: flex;
+	justify-content: center;
+}
+
+/* ボタンのホバー効果 */
+input[type="submit"]:hover {
+    background: #4cae4c;
+}
+
+/*もう一回ボタン*/
+.textlink {
+	display: flex;
+	justify-content: center;
+	font-size: 27px;
+	position: relative; /* 親要素を相対位置にする */
+    overflow: hidden; /* 子要素のはみ出しを隠す */
+}
+
+.textlink01 a::after {
+	content: '';
+	position: absolute;
+	left: 50%; /* 左端に配置 */
+    transform: translateX(-50%); /* 中央に移動 */
+	bottom: 0;
+	width: 0;
+	height: 10px;
+	background-color: rgba(185,155,0,0.5);
+	transition: width 0.3s;
+}
+
+.textlink01 a:hover::after {
+	width: 100%;
+}
