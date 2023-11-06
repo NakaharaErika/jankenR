@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+body{
+	font-family: 'M PLUS 1', sans-serif;
+}
+
 h1{
 	text-align: center;
 }
