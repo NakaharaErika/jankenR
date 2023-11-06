@@ -11,7 +11,14 @@
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-<h1>結果は・・・・</h1>
+<%
+String playerCountStr0 = (String)session.getAttribute("playerCount");
+String titleText = null;
+titleText = playerCountStr0 + "人対戦の結果は・・・";
+%>
+<h1><%= titleText %></h1>
+
+
 
 <div class="container">
 	<div class="box-title-result">${result}</div>

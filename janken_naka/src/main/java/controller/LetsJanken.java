@@ -74,7 +74,7 @@ public class LetsJanken extends HttpServlet {
             int handsFlag = HAND_FLAGS[playerHand]; // プレイヤーの手のビットフラグ
 
             for (int i = 0; i < enemyHands.length; i++) {
-                handsFlag |= HAND_FLAGS[enemyHands[i]]; // 敵の手のビットフラグを追加
+                handsFlag |= HAND_FLAGS[enemyHands[i]]; // 敵の手のビットフラグを追加 OR演算で出ている手の種類を確認
             }
 
             // 結果の判定
