@@ -68,7 +68,7 @@ public class LetsJanken extends HttpServlet {
         }
         
         
-        //じゃんけん判定
+        //じゃんけん判定　参考URL：https://qiita.com/moriweborz/items/445dc60dbdc907ec4204
         private String checkResult(int playerHand, int[] enemyHands) {
         	int[] HAND_FLAGS = {1, 2, 4}; // グー:1, チョキ:2, パー:4
             int handsFlag = HAND_FLAGS[playerHand]; // プレイヤーの手のビットフラグ

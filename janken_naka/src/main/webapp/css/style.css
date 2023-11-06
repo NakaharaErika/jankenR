@@ -7,6 +7,15 @@ body{
 h1{
 	text-align: center;
 }
+
+input[type="number"]{
+	font-size:0.5em;
+	height: 5vh;
+	width: 8vw;
+	text-align: center;
+}
+
+
 /*スタートボタン*/
 .btn {
 display: inline-block;
