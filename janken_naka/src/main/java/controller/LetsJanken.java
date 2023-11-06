@@ -25,31 +25,26 @@ public class LetsJanken extends HttpServlet {
             request.getRequestDispatcher(view).forward(request, response);
         } else {
         	
-	        
-	        int myHand = Integer.parseInt(myHandSri);//int型に変形
-	        int enemyHand1 = makeenmyHand();//敵の手1を設定
-	        int enemyHand2 = makeenmyHand();//敵の手2を設定
-	        
+	        int myHand = Integer.parseInt(myHandSri);//自分の手をint型に変形
+	        int playerCounts = Integer.parseInt(playerCount);//対戦人数をint型に変形
 	        String result = null;//結果入力用
 	        
-	        
-		        if(playerCount.equals("2")) {
-				       //じゃんけん判定２人用の結果を取得
-				        result = checkResult2(myHand,enemyHand1);
+	        //敵の手を人数に応じてランダムに生成する
+	        int[] enemyHands = makeenmyHands(playerCounts-1);
+	        //自分の手と敵の手を渡して、checkResult関数を起動
+	        result = checkResult(myHand,enemyHands);
 		        
-		        } else if(playerCount.equals("3")) {
-			        	//じゃんけん判定3人用の結果を取得
-				        result = checkResult3(myHand,enemyHand1,enemyHand2);
-				        
-				        String enemyHandStr2 = String.valueOf(enemyHand2);
-				        request.setAttribute("enemyHand2", enemyHandStr2);
-		        }
-		        
-		    //じゃんけんの手をstring型に直してセット
-	 		String myHandStr = String.valueOf(myHand);
+		    //自分の手をstring型に直してセット
+	 		String myHandStr = Integer.toString(myHand);
 	        request.setAttribute("myHand", myHandStr);
-	        String enemyHandStr1 = String.valueOf(enemyHand1);
-	        request.setAttribute("enemyHand1", enemyHandStr1);
+	        
+	        // 敵の手をString型に変換してセット
+	        String[] enemyHandStrs = new String[enemyHands.length]; // 文字列の配列を初期化
+	        for (int i = 0; i < enemyHands.length; i++) {
+	            enemyHandStrs[i] = Integer.toString(enemyHands[i]); // 整数を文字列に変換
+	            request.setAttribute("enemyHand" + (i + 1), enemyHandStrs[i]); // 文字列を属性として保存
+	        }
+
 	        
 	        // 勝敗結果をセット
 	        request.setAttribute("result", result);
@@ -62,43 +57,48 @@ public class LetsJanken extends HttpServlet {
         
     
     	//敵の手をランダム生成
-        private int makeenmyHand(){
+        private int[] makeenmyHands(int numberEnemmys){
         	Random rand = new Random();
-        	return rand.nextInt(3);
+        	int[] hands = new int[numberEnemmys];//敵の手を入れる箱を作成
+        	for (int i = 0; i < numberEnemmys; i++) {
+				hands[i] = rand.nextInt(3);
+			}
+        	return hands;
         }
         
         
         //じゃんけん判定
-        private String checkResult2(int m,int e) {
-        	int c;
-        	c = (m - e + 3) % 3;
-        	if (c == 0) {
-        		return "引き分け";
-        	} else if (c == 2) {
-        		return "勝利！";
-        	} else {
-        		return "敗北";
-        	}
-        }
-        
-      //じゃんけん判定3人用
-        private String checkResult3(int m1,int e1, int e2) {
-        	int sum = m1 + e1 + e2;
-            int remainder = sum % 3;
-
-            if (remainder == 0) {
-                // あいこの場合
-                return "引き分け";
-            } else if (remainder == 1) {
-                // ひとりだけ負ける場合
-                if (e1 == e2) return "敗北";
-                else return "勝利";
-            } else {
-                // ひとりだけ勝つ場合
-                if (e1 == e2) return "勝利";
-                else return "敗北";
+        private String checkResult(int m,int[] e) {
+        	String result = null;//結果入力用
+        	//じゃんけん判定二人用
+        	if(e.length == 1) {
+	        	int c;
+	        	c = (m - e[0] + 3) % 3;
+	        	if (c == 0) {
+	        		result = "引き分け";
+	        	} else if (c == 2) {
+	        		result =  "勝利！";
+	        	} else {
+	        		result =  "敗北";
+	        	}
+	        }else if(e.length == 2) {
+	        //じゃんけん判定3人用
+	        	int sum = m + e[0] + e[1];
+	            int remainder = sum % 3;
+	
+	            if (remainder == 0) {
+	                // あいこの場合
+	            	result =  "引き分け";
+	            } else if (remainder == 1) {
+	                // ひとりだけ負ける場合
+	                if (e[0] == e[1]) result =  "敗北";
+	                else result =  "勝利";
+	            } else {
+	                // ひとりだけ勝つ場合
+	                if (e[0] == e[1]) result =  "勝利";
+	                else result =  "敗北";
+	            }
             }
-        
-        }
-        
+			return result;
+     }    
 }

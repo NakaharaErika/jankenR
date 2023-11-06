@@ -19,21 +19,26 @@
 		<h3>あなた</h3>
 		<img src="./img/${myHand}.png" with="200" height="200">
 		
-		<h3>PC</h3>
-		<img src="./img/${enemyHand1}.png" with="200" height="200">
-<!-- 3人対戦の時のみ、敵2の結果を表示（sessionから呼び出す -->
-<% 
-String playerCount = (String) session.getAttribute("playerCount");
-if (playerCount.equals("3")){ %>
-		<h3>PC2</h3>
-		<img src="./img/${enemyHand2}.png" with="200" height="200">
-<%} %>
+<%
+String playerCountStr = (String) session.getAttribute("playerCount");
+int playerCount = Integer.parseInt(playerCountStr); // プレイヤー数を整数に変換
+
+// ループを使用してプレイヤーの数だけ画像を表示
+for (int i = 1; i < playerCount; i++) { // 1から開始しているのは自分を除くため
+    String enemyHand = (String) request.getAttribute("enemyHand" + i);
+%>
+    <h3>PC<%= i %></h3>
+    <img src="./img/<%= enemyHand %>.png" width="200" height="200">
+<%
+}
+%>
 </div>
 
 <br>
 <br>
-<p class="textlink textlink01"><a href="start">トップに戻る</a></p>
-
+<form action="invalidate" method="post">
+  <input type="submit" value="トップに戻る" />
+</form>
 
 </body>
 </html>

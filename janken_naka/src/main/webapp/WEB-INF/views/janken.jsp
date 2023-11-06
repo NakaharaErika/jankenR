@@ -19,11 +19,7 @@
 	<%
     String playerCount = (String)session.getAttribute("playerCount");
     String titleText = null;
-    if ("2".equals(playerCount)) {
-        titleText = "どれかをクリック（２人）";
-    } else if ("3".equals(playerCount)) {
-        titleText = "どれかをクリック（３人）";
-    }
+    titleText = "どれかをクリック（" + playerCount + "人）";
 	%>
 	<div class="box-title"><%= titleText %></div>
 		<div>
