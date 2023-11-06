@@ -18,6 +18,7 @@ public class LetsJanken extends HttpServlet {
         String myHandSri = request.getParameter("rdo");
         HttpSession session = request.getSession();
         String playerCount = (String) session.getAttribute("playerCount");
+
         
         // 手を選ばなかった場合、元のページにリダイレクトさせる
         if (myHandSri == null) {
@@ -68,37 +69,38 @@ public class LetsJanken extends HttpServlet {
         
         
         //じゃんけん判定
-        private String checkResult(int m,int[] e) {
-        	String result = null;//結果入力用
-        	//じゃんけん判定二人用
-        	if(e.length == 1) {
-	        	int c;
-	        	c = (m - e[0] + 3) % 3;
-	        	if (c == 0) {
-	        		result = "引き分け";
-	        	} else if (c == 2) {
-	        		result =  "勝利！";
-	        	} else {
-	        		result =  "敗北";
-	        	}
-	        }else if(e.length == 2) {
-	        //じゃんけん判定3人用
-	        	int sum = m + e[0] + e[1];
-	            int remainder = sum % 3;
-	
-	            if (remainder == 0) {
-	                // あいこの場合
-	            	result =  "引き分け";
-	            } else if (remainder == 1) {
-	                // ひとりだけ負ける場合
-	                if (e[0] == e[1]) result =  "敗北";
-	                else result =  "勝利";
-	            } else {
-	                // ひとりだけ勝つ場合
-	                if (e[0] == e[1]) result =  "勝利";
-	                else result =  "敗北";
-	            }
+        private String checkResult(int playerHand, int[] enemyHands) {
+        	int[] HAND_FLAGS = {1, 2, 4}; // グー:1, チョキ:2, パー:4
+            int handsFlag = HAND_FLAGS[playerHand]; // プレイヤーの手のビットフラグ
+
+            for (int i = 0; i < enemyHands.length; i++) {
+                handsFlag |= HAND_FLAGS[enemyHands[i]]; // 敵の手のビットフラグを追加
             }
-			return result;
-     }    
+
+            // 結果の判定
+            if (handsFlag == 1 || handsFlag == 2 || handsFlag == 4 || handsFlag == 7) {
+                return "引き分け";
+            } else if (handsFlag == 3) {
+                if (playerHand == 0) {
+                    return "勝利！";
+                } else {
+                    return "敗北";
+                }
+            } else if (handsFlag == 5) {
+                if (playerHand == 2) {
+                    return "勝利！";
+                } else {
+                    return "敗北";
+                }
+            } else if (handsFlag == 6) {
+                if (playerHand == 1) {
+                    return "勝利！";
+                } else {
+                    return "敗北";
+                }
+            } else {
+                return "不明な結果"; // このケースが発生することはない
+            }
+        }
+
 }

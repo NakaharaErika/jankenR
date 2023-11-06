@@ -14,13 +14,12 @@
 
 <form action="start" method="post">
 <div class="container">
-	<div class="box-title-result">どっちでやる？</div>
+	<div class="box-title-result">Q.何人でやる？</div>
 		<div class="selectContainer">
-                <button type="submit" name="playerCount" value="2" class="btn btn-a02">2人</button>
-                <button type="submit" name="playerCount" value="3" class="btn btn-a03">3人</button>
+                <input type="number" name="playerCount" step="1" min="2" class="numberInput">人でやろう！
         </div> 
 	</div>	
-	
+	<input type="submit" value="すたーと！">
 </form>	
 
 </body>
